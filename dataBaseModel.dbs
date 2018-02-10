@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="Proyectos" id="Project_31567be" template="Default" database="MySql" >
+	<schema name="CobranzasPrestamos" catalogname="CobranzasPrestamos" >
+		<table name="cliente" generator_rows="150" >
+			<column name="id_cliente" type="int" length="5" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="dni" type="int" length="10" jt="4" mandatory="y" unsigned="y" />
+			<column name="conyuge" type="int" length="10" jt="4" mandatory="y" unsigned="y" >
+				<defo>0000000000</defo>
+			</column>
+			<index name="pk_cliente_id_cliente" unique="PRIMARY_KEY" >
+				<column name="id_cliente" />
+			</index>
+			<index name="idx_cliente_dni" unique="NORMAL" >
+				<column name="dni" />
+			</index>
+			<fk name="fk_cliente_persona" to_schema="CobranzasPrestamos" to_table="persona" delete_action="cascade" update_action="cascade" >
+				<fk_column name="dni" pk="dni" />
+			</fk>
+			<fk name="fk_conyuge" to_schema="CobranzasPrestamos" to_table="persona" delete_action="cascade" update_action="cascade" >
+				<fk_column name="conyuge" pk="dni" />
+			</fk>
+			<storage><![CDATA[engine=InnoDB]]></storage>
+		</table>
+		<table name="persona" generator_rows="100" >
+			<column name="dni" type="int" length="10" jt="4" mandatory="y" unsigned="y" >
+				<defo>0000000000</defo>
+			</column>
+			<column name="nombre" type="varchar" length="40" jt="12" mandatory="y" />
+			<column name="fecha_nacimiento" type="date" jt="91" />
+			<column name="telefono" type="varchar" length="20" jt="12" />
+			<index name="pk_persona_dni" unique="PRIMARY_KEY" >
+				<column name="dni" />
+			</index>
+			<storage><![CDATA[engine=InnoDB]]></storage>
+		</table>
+	</schema>
+	<connector name="Proyectos" database="MySql" driver_class="com.mysql.jdbc.Driver" driver_jar="mysql-connector-java-5.1.44-bin.jar" driver_desc="Standard" host="localhost" port="3306" instance="CobranzasPrestamos" user="root" passwd="cGFndWE=" />
+	<layout name="Default Layout" id="Layout_48a3c20" show_relation="columns" >
+		<entity schema="CobranzasPrestamos" name="persona" color="1f5182" x="300" y="225" />
+		<entity schema="CobranzasPrestamos" name="cliente" color="1f5182" x="585" y="240" />
+		<callout x="45" y="45" pointer="NO" >
+			<comment><![CDATA[Create new tables by right-clicking the layout, new foreign keys by drag and drop of one column over a primary key column.
+For a better design create multiple layouts (diagrams) with the same or different tables.
+Right-click any table header to start Relational Data Browse (very useful) or other tools.]]></comment>
+		</callout>
+	</layout>
+</project>
