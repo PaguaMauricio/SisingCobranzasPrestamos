@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 13/02/2018 00:50:04 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Model.Direccion" table="direccion" catalog="CobranzasPrestamos" optimistic-lock="version">
+        <id name="idDireccion" type="java.lang.Integer">
+            <column name="id_direccion" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="persona" class="Model.Persona" fetch="select">
+            <column name="dni_habitante" />
+        </many-to-one>
+        <property name="pais" type="string">
+            <column name="pais" length="20" not-null="true" />
+        </property>
+        <property name="provincia" type="string">
+            <column name="provincia" length="20" not-null="true" />
+        </property>
+        <property name="localidad" type="string">
+            <column name="localidad" length="11" not-null="true" />
+        </property>
+        <property name="direccionExacta" type="string">
+            <column name="direccion_exacta" length="45" not-null="true" />
+        </property>
+        <set name="personas" table="persona" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="direccion" />
+            </key>
+            <one-to-many class="Model.Persona" />
+        </set>
+    </class>
+</hibernate-mapping>
