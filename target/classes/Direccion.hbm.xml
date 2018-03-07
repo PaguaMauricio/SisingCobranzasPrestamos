@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 13/02/2018 00:50:04 by Hibernate Tools 4.3.1 -->
+<!-- Generated 13/02/2018 20:31:17 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="Model.Direccion" table="direccion" catalog="CobranzasPrestamos" optimistic-lock="version">
+    <class name="Modelo.Direccion" table="direccion" catalog="CobranzasPrestamos" optimistic-lock="version">
         <id name="idDireccion" type="java.lang.Integer">
             <column name="id_direccion" />
             <generator class="identity" />
         </id>
-        <many-to-one name="persona" class="Model.Persona" fetch="select">
+        <many-to-one name="persona" class="Modelo.Persona" fetch="select">
             <column name="dni_habitante" />
         </many-to-one>
         <property name="pais" type="string">
@@ -27,7 +27,7 @@
             <key>
                 <column name="direccion" />
             </key>
-            <one-to-many class="Model.Persona" />
+            <one-to-many class="Modelo.Persona" />
         </set>
     </class>
 </hibernate-mapping>

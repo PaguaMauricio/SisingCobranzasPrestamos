@@ -4,13 +4,20 @@
 		<table name="cliente" >
 			<column name="id_cliente" type="int" length="10" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="conyuge" type="int" length="10" jt="4" unsigned="y" />
+			<column name="dni" type="int" length="10" jt="4" mandatory="y" unsigned="y" />
 			<index name="pk_cliente_id_cliente" unique="PRIMARY_KEY" >
 				<column name="id_cliente" />
 			</index>
-			<index name="idx_cliente_conyuge" unique="NORMAL" >
+			<index name="idx_cliente_conyuge" unique="UNIQUE" >
 				<column name="conyuge" />
 			</index>
+			<index name="idx_cliente_dni" unique="UNIQUE" >
+				<column name="dni" />
+			</index>
 			<fk name="fk_cliente_persona" to_schema="CobranzasPrestamos" to_table="persona" delete_action="cascade" update_action="cascade" >
+				<fk_column name="dni" pk="dni" />
+			</fk>
+			<fk name="fk_cliente_conyuge" to_schema="CobranzasPrestamos" to_table="persona" >
 				<fk_column name="conyuge" pk="dni" />
 			</fk>
 			<storage><![CDATA[engine=InnoDB]]></storage>
@@ -30,7 +37,7 @@
 			<index name="idx_direccion_dni_habitante" unique="NORMAL" >
 				<column name="dni_habitante" />
 			</index>
-			<fk name="fk_direccion_persona" to_schema="CobranzasPrestamos" to_table="persona" >
+			<fk name="fk_direccion_persona" to_schema="CobranzasPrestamos" to_table="persona" delete_action="setNull" update_action="setNull" >
 				<fk_column name="dni_habitante" pk="dni" />
 			</fk>
 			<storage><![CDATA[engine=InnoDB]]></storage>
@@ -41,12 +48,19 @@
 			<column name="fecha_nacimiento" type="date" jt="91" />
 			<column name="cuil" type="varchar" length="20" jt="12" />
 			<column name="direccion" type="int" length="10" jt="4" unsigned="y" />
+			<column name="cliente" type="int" length="10" jt="4" unsigned="y" />
 			<index name="pk_persona_dni" unique="PRIMARY_KEY" >
 				<column name="dni" />
 			</index>
 			<index name="idx_persona_direccion" unique="NORMAL" >
 				<column name="direccion" />
 			</index>
+			<index name="idx_persona_cliente" unique="UNIQUE" >
+				<column name="cliente" />
+			</index>
+			<fk name="fk_persona_cliente" to_schema="CobranzasPrestamos" to_table="cliente" delete_action="cascade" update_action="cascade" >
+				<fk_column name="cliente" pk="id_cliente" />
+			</fk>
 			<fk name="fk_persona_direccion" to_schema="CobranzasPrestamos" to_table="direccion" delete_action="cascade" update_action="cascade" >
 				<fk_column name="direccion" pk="id_direccion" />
 			</fk>
@@ -55,9 +69,9 @@
 	</schema>
 	<connector name="Proyectos" database="MySql" driver_class="com.mysql.jdbc.Driver" driver_jar="mysql-connector-java-5.1.44-bin.jar" driver_desc="Standard" host="localhost" port="3306" instance="CobranzasPrestamos" user="root" passwd="cGFndWE=" />
 	<layout name="Default Layout" id="Layout_48a3c20" show_relation="columns" >
-		<entity schema="CobranzasPrestamos" name="cliente" color="1f5182" x="690" y="300" />
-		<entity schema="CobranzasPrestamos" name="direccion" color="1f5182" x="585" y="405" />
 		<entity schema="CobranzasPrestamos" name="persona" color="1f5182" x="375" y="300" />
+		<entity schema="CobranzasPrestamos" name="direccion" color="1f5182" x="585" y="405" />
+		<entity schema="CobranzasPrestamos" name="cliente" color="1f5182" x="690" y="300" />
 		<callout x="45" y="45" pointer="NO" >
 			<comment><![CDATA[Create new tables by right-clicking the layout, new foreign keys by drag and drop of one column over a primary key column.
 For a better design create multiple layouts (diagrams) with the same or different tables.

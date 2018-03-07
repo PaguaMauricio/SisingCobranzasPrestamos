@@ -1,5 +1,5 @@
 package Modelo;
-// Generated 13/02/2018 00:50:03 by Hibernate Tools 4.3.1
+// Generated 13/02/2018 20:31:17 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -13,6 +13,7 @@ public class Persona  implements java.io.Serializable {
 
 
      private int dni;
+     private Cliente cliente;
      private Direccion direccion;
      private String nombre;
      private Date fechaNacimiento;
@@ -27,23 +28,14 @@ public class Persona  implements java.io.Serializable {
     public Persona(int dni) {
         this.dni = dni;
     }
-    public Persona(int dni, Direccion direccion, String nombre, Date fechaNacimiento, String cuil, Set clientes, Set direccions) {
+    public Persona(int dni, Direccion direccion, String nombre, Date fechaNacimiento, String cuil, Set clientes, Set direcciones) {
        this.dni = dni;
        this.direccion = direccion;
        this.nombre = nombre;
        this.fechaNacimiento = fechaNacimiento;
        this.cuil = cuil;
        this.clientes = clientes;
-       this.direcciones = direccions;
-    }
-    public Persona(Persona p) {
-       this.dni = p.getDni();
-       this.direccion = p.getDireccion();
-       this.nombre = p.getNombre();
-       this.fechaNacimiento = p.getFechaNacimiento();
-       this.cuil = p.getCuil();
-       this.clientes = p.getClientes();
-       this.direcciones = p.getDireccions();
+       this.direcciones = direcciones;
     }
    
     public int getDni() {
@@ -52,6 +44,13 @@ public class Persona  implements java.io.Serializable {
     
     public void setDni(int dni) {
         this.dni = dni;
+    }
+    public Cliente getCliente() {
+        return this.cliente;
+    }
+    
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
     public Direccion getDireccion() {
         return this.direccion;
@@ -88,12 +87,17 @@ public class Persona  implements java.io.Serializable {
     public void setClientes(Set clientes) {
         this.clientes = clientes;
     }
-    public Set getDireccions() {
+    public Set getDirecciones() {
         return this.direcciones;
     }
     
-    public void setDireccions(Set direccions) {
-        this.direcciones = direccions;
+    public void setDirecciones(Set direcciones) {
+        this.direcciones = direcciones;
+    }
+
+    @Override
+    public String toString() {
+        return "Persona{" + "dni=" + dni + ", cliente=" + cliente + ", direccion=" + direccion + ", nombre=" + nombre + ", cuil=" + cuil + '}';
     }
 
 

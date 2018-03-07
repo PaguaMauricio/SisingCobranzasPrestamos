@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 13/02/2018 20:31:17 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Modelo.Cliente" table="cliente" catalog="CobranzasPrestamos" optimistic-lock="version">
+        <id name="idCliente" type="java.lang.Integer">
+            <column name="id_cliente" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="persona" class="Modelo.Persona" fetch="select">
+            <column name="dni" not-null="true" unique="true" />
+        </many-to-one>
+        <property name="conyuge" type="java.lang.Integer">
+            <column name="conyuge" unique="true" />
+        </property>
+        <set name="personas" table="persona" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="cliente" unique="true" />
+            </key>
+            <one-to-many class="Modelo.Persona" />
+        </set>
+    </class>
+</hibernate-mapping>

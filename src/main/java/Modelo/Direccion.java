@@ -1,5 +1,5 @@
 package Modelo;
-// Generated 13/02/2018 00:50:03 by Hibernate Tools 4.3.1
+// Generated 13/02/2018 20:31:17 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -86,6 +86,11 @@ public class Direccion  implements java.io.Serializable {
     
     public void setPersonas(Set personas) {
         this.personas = personas;
+    }
+
+    @Override
+    public String toString() {
+        return "Direccion{" + "pais=" + pais + ", provincia=" + provincia + ", localidad=" + localidad + ", direccionExacta=" + direccionExacta + '}';
     }
 
 

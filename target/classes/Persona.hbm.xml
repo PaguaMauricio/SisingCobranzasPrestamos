@@ -1,14 +1,17 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 13/02/2018 00:50:04 by Hibernate Tools 4.3.1 -->
+<!-- Generated 13/02/2018 20:31:17 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="Model.Persona" table="persona" catalog="CobranzasPrestamos" optimistic-lock="version">
+    <class name="Modelo.Persona" table="persona" catalog="CobranzasPrestamos" optimistic-lock="version">
         <id name="dni" type="int">
             <column name="dni" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="direccion" class="Model.Direccion" fetch="select">
+        <many-to-one name="cliente" class="Modelo.Cliente" fetch="select">
+            <column name="cliente" unique="true" />
+        </many-to-one>
+        <many-to-one name="direccion" class="Modelo.Direccion" fetch="select">
             <column name="direccion" />
         </many-to-one>
         <property name="nombre" type="string">
@@ -22,15 +25,15 @@
         </property>
         <set name="clientes" table="cliente" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="conyuge" />
+                <column name="dni" not-null="true" unique="true" />
             </key>
-            <one-to-many class="Model.Cliente" />
+            <one-to-many class="Modelo.Cliente" />
         </set>
-        <set name="direccions" table="direccion" inverse="true" lazy="true" fetch="select">
+        <set name="direcciones" table="direccion" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="dni_habitante" />
             </key>
-            <one-to-many class="Model.Direccion" />
+            <one-to-many class="Modelo.Direccion" />
         </set>
     </class>
 </hibernate-mapping>
